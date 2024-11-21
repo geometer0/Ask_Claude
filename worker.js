@@ -4,9 +4,9 @@ const systemPrompt = "You are a browser assistant, please translate any non-Engl
 chrome.contextMenus.onClicked.addListener(onClick);
 
 async function onClick(info) {
-  console.log('Selection clicked: ', info.selectionText)
+  //console.log('Selection clicked: ', info.selectionText)
   const result = await chrome.storage.sync.get(['ANTHROPIC_API_KEY']);
-  console.log(result.ANTHROPIC_API_KEY);
+  //console.log(result.ANTHROPIC_API_KEY);
   const apiKey = result.ANTHROPIC_API_KEY;
   
 
@@ -30,7 +30,7 @@ async function onClick(info) {
      })
   });
 
-  console.log('Got response:', response);
+  //console.log('Got response:', response);
 
   if (!response.ok) {
     const errorText = await response.text();
@@ -41,6 +41,13 @@ async function onClick(info) {
     });
     return;
   }
+
+  chrome.windows.create({
+    focused: true,
+    type: "popup",
+    setSelfAsOpener: true,
+
+  });
 
   const reader = response.body.getReader();
 
