@@ -12,4 +12,21 @@ chrome.contextMenus.onClicked.addListener((info,tab) => {
                 selectionText: info.selectionText
         });
 });
-      
+
+chrome.runtime.onMessage.addListener(async (message, sender) => {
+        if (message.type == 'createPopup') { 
+                const popupWindow = createPopup(message);
+        }
+});
+
+function createPopup(message) {
+        chrome.windows.create({
+                url: 'popup.html',
+                focused: true,
+                type: "popup",
+                width: 400,
+                height: 400,
+                top: Math.floor(message.coords.bottom + 5),
+                left: Math.floor(message.coords.left - 200)
+        });
+};
