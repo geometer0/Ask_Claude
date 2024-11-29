@@ -22,6 +22,8 @@ chrome.runtime.onMessage.addListener((message,sender,sendResponse) => {
         });
 
         stashResponse(message.selectionText);
+
+        setTimeout(() => stashResponse(message.selectionText + " test stream"),2000)
 });
 
 async function onAskClaudeClick (message) {

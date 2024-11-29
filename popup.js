@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const responseDiv = document.getElementById('response');
-    initText(responseDiv);
+    render(responseDiv);
+    chrome.storage.onChanged.addListener(() => render(responseDiv));
 });    
 
-async function initText(divName){
+async function render(div){
     const result = await chrome.storage.local.get('popupText');
-    divName.textContent = result.popupText;
+    div.textContent = result.popupText;
 };
