@@ -3,14 +3,24 @@
   "name": "Ask Claude",
   "permissions": [
     "contextMenus",
-    "storage"
-  ],
-  "host_permissions": [
-    "https://api.anthropic.com/*"
+    "storage",
+    "tabs",
+    "scripting"
   ],
   "background": {
     "service_worker": "worker.js"
   },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["dist/content.js"]
+  }],
+  "web_accessible_resources": [{
+    "matches": ["<all_urls>"],
+    "resources": ["https://cdn.skypack.dev/@anthropic-ai/sdk"]
+  }],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "description": "Have Claude translate, define, or otherwise explain highlighted text",
   "version": "0.1",
   "action": {
