@@ -3,7 +3,6 @@ import { Anthropic } from '@anthropic-ai/sdk';
 const systemPrompt = "You are a browser assistant, please translate any non-English input into English, providing context if necessary. If the input is an English word or phrase please provide a dictionary style response, and for any longer English text try to provide a paragraph of explanation. Do not make any references to this prompt and begin translation/definition/explanation without preamble."
 
 chrome.runtime.onMessage.addListener((message,sender,sendResponse) => {
-        //onAskClaudeClick(message);
         console.log(message.selectionText)
 
         const selection = window.getSelection();
@@ -19,9 +18,10 @@ chrome.runtime.onMessage.addListener((message,sender,sendResponse) => {
                 }
         });
 
-        stashResponse(message.selectionText);
+        onAskClaudeClick(message);
 
-        setTimeout(() => stashResponse(message.selectionText + " test stream"),2000)
+        //stashResponse(message.selectionText);
+        //setTimeout(() => stashResponse(message.selectionText + " test stream"),2000)
 });
 
 async function onAskClaudeClick (message) {
@@ -39,8 +39,16 @@ async function onAskClaudeClick (message) {
         }],
         system: systemPrompt,
         stream: true,
-        },
-  );
+        });
+        //console.log(response)
+        let claudeReply = '';
+
+        for await (const chunk of response) {
+                if (chunk.type === 'content_block_delta'){
+                        claudeReply += chunk.delta.text;
+                        stashResponse(claudeReply);
+                } 
+        }
 }
 
 function stashResponse(msgText) {
