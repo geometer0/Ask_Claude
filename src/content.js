@@ -13,8 +13,8 @@ chrome.runtime.onMessage.addListener((message,sender,sendResponse) => {
                 type: 'createPopup',
                 text: message.selectionText,
                 coords: {
-                        bottom: rect.bottom + window.scrollY,
-                        left: rect.left
+                        top: rect.top + window.screenY,
+                        left: rect.left + window.screenX
                 }
         });
 

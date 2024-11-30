@@ -20,13 +20,14 @@ chrome.runtime.onMessage.addListener(async (message, sender) => {
 });
 
 function createPopup(message) {
+        //console.log("validate coords: ",top,left)
         chrome.windows.create({
                 url: 'popup.html',
                 focused: true,
                 type: "popup",
                 width: 400,
                 height: 400,
-                top: Math.floor(message.coords.bottom + 5),
+                top: Math.floor(message.coords.top + 5),
                 left: Math.floor(message.coords.left - 200)
         });
 };
