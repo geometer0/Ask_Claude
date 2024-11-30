@@ -8,3 +8,6 @@ async function render(div){
     const result = await chrome.storage.local.get('popupText');
     div.textContent = result.popupText;
 };
+window.addEventListener('blur', () => {
+    window.close();
+  });
