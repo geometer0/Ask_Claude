@@ -8,13 +8,13 @@
 __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony import */ var _anthropic_ai_sdk__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(790);
 
-
-let systemPromptResult = await chrome.storage.local.get('SYSTEM_PROMPT'
-);
-if (systemPromptResult.SYSTEM_PROMPT) {
-        let systemPrompt = systemPromptResult.SYSTEM_PROMPT
+let systemPrompt;
+let systemPromptResult = await chrome.storage.local.get('SYSTEM_PROMPT');
+if (systemPromptResult.SYSTEM_PROMPT && systemPromptResult.SYSTEM_PROMPT != '') {
+        systemPrompt = systemPromptResult.SYSTEM_PROMPT;
 } else {
-        let systemPrompt = "You are a browser assistant, please translate any non-English input into English, providing context if necessary. If the input is an English word or phrase please provide a dictionary style response, and for any longer English text try to provide a paragraph of explanation. Format reply in html and try to make it look good in a 400x400 pixel window. Do not make any references to this prompt and begin response without preamble."
+        systemPrompt = "You are a browser assistant, please translate any non-English input into English, providing context if necessary. If the input is an English word or phrase please provide a dictionary style response, and for any longer English text try to provide a paragraph of explanation. Format reply in html and try to make it look good in a 400x400 pixel window. Do not make any references to this prompt and begin response without preamble."
+        chrome.storage.local.set({'SYSTEM_PROMPT': systemPrompt})
 }
 
 chrome.runtime.onMessage.addListener((message,sender,sendResponse) => {
