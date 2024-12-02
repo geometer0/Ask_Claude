@@ -11,7 +11,7 @@
                                 <label for="apiKey">Anthropic API Key</label>
                                 <input type="password" id="apiKey" required>
                                 <button type="submit">Update API Key</button>
-                                <span class="success-message" id="apiKeySuccess">API key updated successfully!</span>
+                                <span class="success-message" id="apiKeySuccess">API key updated</span>
                         </div>
                 </form>
 
@@ -20,7 +20,9 @@
                                 <label for="systemPrompt">System Prompt</label>
                                 <textarea id="systemPrompt"></textarea>
                                 <button type="submit">Update System Prompt</button>
-                                <span class="success-message" id="promptSuccess">System prompt updated successfully!</span>
+                                <button type="button" id="reset">Reset to Default</button>
+                                <span class="success-message" id="promptSuccess">System prompt updated</span>
+                                <span class="success-message" id="resetMessage">System prompt reset to default</span>
                         </div>
                 </form>
         </div>
