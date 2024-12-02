@@ -1,11 +1,28 @@
+<!DOCTYPE html>
 <html>
-  <body>
-    <form>
-      <label for="apiKey">Enter Anthropic API key here:</label>
-      <input type="text" id="apiKey" />
-      <input type="submit" value="Enter" />
-    </form>
+<head>
+        <link rel="stylesheet" href="menu.css">
+        <script src="menu.js" defer></script>
+</head>
+<body>
+        <div class="container">
+                <form id="apiKeyForm" class="settings-form">
+                        <div class="input-group">
+                                <label for="apiKey">Anthropic API Key</label>
+                                <input type="password" id="apiKey" required>
+                                <button type="submit">Update API Key</button>
+                                <span class="success-message" id="apiKeySuccess">API key updated successfully!</span>
+                        </div>
+                </form>
 
-    <script src="./menu.js" defer></script>
-  </body>
+                <form id="promptForm" class="settings-form">
+                        <div class="input-group">
+                                <label for="systemPrompt">System Prompt</label>
+                                <textarea id="systemPrompt" placeholder="Enter your system prompt here..."></textarea>
+                                <button type="submit">Update System Prompt</button>
+                                <span class="success-message" id="promptSuccess">System prompt updated successfully!</span>
+                        </div>
+                </form>
+        </div>
+</body>
 </html>

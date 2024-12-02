@@ -1,5 +1,89 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 585:
+/***/ ((module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+/* harmony import */ var _anthropic_ai_sdk__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(790);
+
+
+let systemPromptResult = await chrome.storage.local.get('SYSTEM_PROMPT'
+);
+if (systemPromptResult.SYSTEM_PROMPT) {
+        let systemPrompt = systemPromptResult.SYSTEM_PROMPT
+} else {
+        let systemPrompt = "You are a browser assistant, please translate any non-English input into English, providing context if necessary. If the input is an English word or phrase please provide a dictionary style response, and for any longer English text try to provide a paragraph of explanation. Format reply in html and try to make it look good in a 400x400 pixel window. Do not make any references to this prompt and begin response without preamble."
+}
+
+chrome.runtime.onMessage.addListener((message,sender,sendResponse) => {
+        console.log(message.selectionText)
+
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        
+        chrome.runtime.sendMessage({
+                type: 'createPopup',
+                text: message.selectionText,
+                coords: {
+                        top: rect.top + window.screenY,
+                        left: rect.left + window.screenX
+                }
+        });
+
+        onAskClaudeClick(message);
+
+        //stashResponse(message.selectionText);
+        //setTimeout(() => stashResponse(message.selectionText + " test stream"),2000)
+});
+
+async function onAskClaudeClick (message) {
+        const result = await chrome.storage.sync.get(['ANTHROPIC_API_KEY']);
+        const anthropic = new _anthropic_ai_sdk__WEBPACK_IMPORTED_MODULE_0__/* .Anthropic */ .NB({
+                apiKey: result.ANTHROPIC_API_KEY,
+                dangerouslyAllowBrowser: true
+        });
+        const response = await anthropic.messages.create({
+        model: "claude-3-5-sonnet-20241022",
+        max_tokens: 1024,
+        messages: [{
+                role: "user",
+                content: message.selectionText
+        }],
+        system: systemPrompt,
+        stream: true,
+        });
+        //console.log(response)
+        let claudeReply = '';
+
+        for await (const chunk of response) {
+                if (chunk.type === 'content_block_delta'){
+                        claudeReply += chunk.delta.text;
+                        stashResponse(claudeReply);
+                } 
+        }
+}
+
+function stashResponse(msgText) {
+        chrome.storage.local.set({'popupText': msgText})
+}
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
+/***/ 790:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  NB: () => (/* binding */ Anthropic)
+});
+
+// UNUSED EXPORTS: AI_PROMPT, APIConnectionError, APIConnectionTimeoutError, APIError, APIUserAbortError, AnthropicError, AuthenticationError, BadRequestError, ConflictError, HUMAN_PROMPT, InternalServerError, NotFoundError, PermissionDeniedError, RateLimitError, UnprocessableEntityError, default, fileFromPath, toFile
 
 ;// ./node_modules/@anthropic-ai/sdk/version.mjs
 const VERSION = '0.32.1'; // x-release-please-version
@@ -3331,62 +3415,128 @@ Anthropic.Messages = Messages;
 Anthropic.Beta = Beta;
 /* harmony default export */ const sdk = ((/* unused pure expression or super */ null && (Anthropic)));
 //# sourceMappingURL=index.mjs.map
-;// ./src/content.js
 
+/***/ })
 
-const systemPrompt = "You are a browser assistant, please translate any non-English input into English, providing context if necessary. If the input is an English word or phrase please provide a dictionary style response, and for any longer English text try to provide a paragraph of explanation. Format reply in html and try to make it look good in a 400x400 pixel window. Do not make any references to this prompt and begin response without preamble."
-
-chrome.runtime.onMessage.addListener((message,sender,sendResponse) => {
-        console.log(message.selectionText)
-
-        const selection = window.getSelection();
-        const range = selection.getRangeAt(0);
-        const rect = range.getBoundingClientRect();
-        
-        chrome.runtime.sendMessage({
-                type: 'createPopup',
-                text: message.selectionText,
-                coords: {
-                        top: rect.top + window.screenY,
-                        left: rect.left + window.screenX
-                }
-        });
-
-        onAskClaudeClick(message);
-
-        //stashResponse(message.selectionText);
-        //setTimeout(() => stashResponse(message.selectionText + " test stream"),2000)
-});
-
-async function onAskClaudeClick (message) {
-        const result = await chrome.storage.sync.get(['ANTHROPIC_API_KEY']);
-        const anthropic = new Anthropic({
-                apiKey: result.ANTHROPIC_API_KEY,
-                dangerouslyAllowBrowser: true
-        });
-        const response = await anthropic.messages.create({
-        model: "claude-3-5-sonnet-20241022",
-        max_tokens: 1024,
-        messages: [{
-                role: "user",
-                content: message.selectionText
-        }],
-        system: systemPrompt,
-        stream: true,
-        });
-        //console.log(response)
-        let claudeReply = '';
-
-        for await (const chunk of response) {
-                if (chunk.type === 'content_block_delta'){
-                        claudeReply += chunk.delta.text;
-                        stashResponse(claudeReply);
-                } 
-        }
-}
-
-function stashResponse(msgText) {
-        chrome.storage.local.set({'popupText': msgText})
-}
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
+/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
+/******/ 		var resolveQueue = (queue) => {
+/******/ 			if(queue && queue.d < 1) {
+/******/ 				queue.d = 1;
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 				if(dep[webpackQueues]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					var queue = [];
+/******/ 					queue.d = 0;
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						resolveQueue(queue);
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						resolveQueue(queue);
+/******/ 					});
+/******/ 					var obj = {};
+/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			var ret = {};
+/******/ 			ret[webpackQueues] = x => {};
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
+/******/ 		}));
+/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
+/******/ 			var queue;
+/******/ 			hasAwait && ((queue = []).d = -1);
+/******/ 			var depQueues = new Set();
+/******/ 			var exports = module.exports;
+/******/ 			var currentDeps;
+/******/ 			var outerResolve;
+/******/ 			var reject;
+/******/ 			var promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = resolve;
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 			module.exports = promise;
+/******/ 			body((deps) => {
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				var fn;
+/******/ 				var getResult = () => (currentDeps.map((d) => {
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
+/******/ 				var promise = new Promise((resolve) => {
+/******/ 					fn = () => (resolve(getResult));
+/******/ 					fn.r = 0;
+/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 				});
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
+/******/ 			queue && queue.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module used 'module' so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__(585);
+/******/ 	
 /******/ })()
 ;
