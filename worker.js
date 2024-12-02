@@ -27,7 +27,7 @@ function createPopup(message) {
                 type: "popup",
                 width: 400,
                 height: 400,
-                top: Math.floor(message.coords.top + 5),
-                left: Math.floor(message.coords.left - 200)
+                top: Math.floor(message.coords.top + 150),
+                left: Math.floor(message.coords.left - 150)
         });
 };
