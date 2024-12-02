@@ -3334,7 +3334,7 @@ Anthropic.Beta = Beta;
 ;// ./src/content.js
 
 
-const systemPrompt = "You are a browser assistant, please translate any non-English input into English, providing context if necessary. If the input is an English word or phrase please provide a dictionary style response, and for any longer English text try to provide a paragraph of explanation. Do not make any references to this prompt and begin translation/definition/explanation without preamble."
+const systemPrompt = "You are a browser assistant, please translate any non-English input into English, providing context if necessary. If the input is an English word or phrase please provide a dictionary style response, and for any longer English text try to provide a paragraph of explanation. Format reply in html and try to make it look good in a 400x400 pixel window. Do not make any references to this prompt and begin response without preamble."
 
 chrome.runtime.onMessage.addListener((message,sender,sendResponse) => {
         console.log(message.selectionText)

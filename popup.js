@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function render(div){
     const result = await chrome.storage.local.get('popupText');
-    div.textContent = result.popupText;
+    div.innerHTML = result.popupText;
 };
 window.addEventListener('blur', () => {
     window.close();
