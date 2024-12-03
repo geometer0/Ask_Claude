@@ -64,3 +64,8 @@ button:hover {
     opacity:1;
     transition: opacity 2s ease-out;
 }
+
+.button-container {
+    display: flex;
+    gap: 20px;
+}
