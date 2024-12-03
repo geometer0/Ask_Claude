@@ -25,10 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 chrome.storage.local.set({
                         ANTHROPIC_API_KEY: userKey
                 }, () => {
-                        apiKeySuccess.style.display = 'block';
-                        setTimeout(() => {
-                                apiKeySuccess.style.display = 'none';
-                        }, 3000);
+                        popInFadeOut(apiKeySuccess);
                 });
         });
   
@@ -40,10 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         SYSTEM_PROMPT: systemPrompt
                 }, () => {
                         reloadMenu();
-                        promptSuccess.style.display = 'block';
-                        setTimeout(() => {
-                                promptSuccess.style.display = 'none';
-                        }, 3000);
+                        popInFadeOut(promptSuccess);
                 });
         });
 
@@ -53,10 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 chrome.storage.local.set({'SYSTEM_PROMPT': result.DEFAULT_SYSTEM_PROMPT})
                                 systemPromptInput.value = result.DEFAULT_SYSTEM_PROMPT;
                                 reloadMenu();
-                                resetMessage.style.display = 'block';
-                                setTimeout(() => {
-                                       resetMessage.style.display = 'none'; 
-                                }, 3000);
+                                popInFadeOut(resetMessage);
                         });
         });
 });
@@ -67,3 +58,15 @@ function reloadMenu() {
                     chrome.tabs.reload(tabs[0].id);
                 }
         })}
+
+function popInFadeOut(element) {
+        element.style.transition = 'none';
+        element.style.opacity = '1';
+        element.style.display = 'block';
+        element.offsetHeight;
+        element.style.transition = 'opacity 2s ease-out'
+        element.style.opacity = '0';
+        setTimeout(() => {
+                element.style.display = 'none';
+        }, 2000);
+}

@@ -61,4 +61,6 @@ button:hover {
     display: none;
     color: #059669;
     font-size: 14px;
+    opacity:1;
+    transition: opacity 2s ease-out;
 }
