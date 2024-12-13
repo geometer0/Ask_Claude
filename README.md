@@ -7,10 +7,14 @@ Google Chrome extension that uses Anthropic API calls to provide translation, de
 
 TODO:
 
-* Make the menu look good with ability to change prompt
-* Budget debug mode - capture some good testable text throughputs to run without having to spam API calls
+* Look into autobuild options, manual reloading is tiresome
+* Make popup responsive to length of text
+* Give menu more of a darkmode feel
+* Give popup more of a darkmode feel
+* Try removing the weird shadowboxes around each form field in menu
+* Re-organize files into html, css, js folders
 * Add some error handling especially in API call where errors are likely
-* Prompt reset to default button
+
 
 Ideas:
 
