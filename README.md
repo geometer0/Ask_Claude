@@ -13,8 +13,6 @@ TODO:
 * Give popup more of a darkmode feel
 * Try removing the weird shadowboxes around each form field in menu
 * Re-organize files into html, css, js folders
-* Add some error handling especially in API call where errors are likely
-
 
 Ideas:
 
