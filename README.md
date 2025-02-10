@@ -16,7 +16,7 @@ npm run build
 ```
 3. Follow these instructions for [loading an unpacked Chrome extentension](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
 4. Open the extension menu, paste in your Anthropic API key, and click 'Update API Key'.
-5. Highlight text in browser and right click to get a menu option "Ask Claude".
+5. Highlight text in browser and right click (shortcut: Alt-a) to get a menu option "Ask Claude".
 
 ### Development
 

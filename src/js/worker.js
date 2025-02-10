@@ -6,6 +6,21 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 });
 
+chrome.commands.onCommand.addListener(async (command) => {
+    const [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+    });
+    const [{ result }] = await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: () => window.getSelection().toString(),
+    });
+    chrome.tabs.sendMessage(tab.id, {
+        type: "contextClick",
+        selectionText: result,
+    });
+});
+
 chrome.contextMenus.onClicked.addListener((info, tab) => {
     chrome.tabs.sendMessage(tab.id, {
         type: "contextClick",

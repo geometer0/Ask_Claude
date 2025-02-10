@@ -12,6 +12,12 @@
             "run_at": ["document_start"]
         }
     ],
+    "commands": {
+        "Ask Claude": {
+            "suggested_key": "Alt+A",
+            "description": "Ask Claude about highlighted text"
+        }
+    },
     "web_accessible_resources": [
         {
             "matches": ["<all_urls>"],
