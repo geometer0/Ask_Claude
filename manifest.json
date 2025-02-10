@@ -1,34 +1,31 @@
 {
-  "manifest_version": 3,
-  "name": "Ask Claude",
-  "permissions": [
-    "contextMenus",
-    "storage",
-    "tabs",
-    "scripting"
-  ],
-  "background": {
-    "service_worker": "worker.js"
-  },
-  "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "js": ["dist/content.js"]
-  }],
-  "web_accessible_resources": [{
-    "matches": ["<all_urls>"],
-    "resources": ["https://cdn.skypack.dev/@anthropic-ai/sdk"]
-  }],
-  "host_permissions": [
-    "<all_urls>"
-  ],
-  "description": "Have Claude translate, define, or otherwise explain highlighted text",
-  "version": "0.1",
-  "action": {
-    "default_popup": "menu.html"
+    "manifest_version": 3,
+    "name": "Ask Claude",
+    "permissions": ["contextMenus", "storage", "tabs", "scripting"],
+    "background": {
+        "service_worker": "dist/worker.js"
     },
-  "icons": {
-    "16": "images/icon16.png",
-    "32": "images/icon32.png",
-    "48": "images/icon48.png"
-  }
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["dist/content.js"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "matches": ["<all_urls>"],
+            "resources": ["https://cdn.skypack.dev/@anthropic-ai/sdk"]
+        }
+    ],
+    "host_permissions": ["<all_urls>"],
+    "description": "Have Claude translate, define, or otherwise explain highlighted text",
+    "version": "0.1",
+    "action": {
+        "default_popup": "dist/menu.html"
+    },
+    "icons": {
+        "16": "src/images/icon16.png",
+        "32": "src/images/icon32.png",
+        "48": "src/images/icon48.png"
+    }
 }

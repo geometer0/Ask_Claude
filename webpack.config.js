@@ -1,14 +1,58 @@
-const path = require('path');
+const path = require("path");
+const ExtReloader = require("webpack-ext-reloader");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: './src/content.js',
-  output: {
-    filename: 'content.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-  mode: 'production',  // Changed from 'development'
-  optimization: {
-    minimize: false    // This helps avoid eval()
-  },
-  devtool: false      // Disable source maps
+    entry: {
+        content: "./src/js/content.js",
+        worker: "./src/js/worker.js",
+        popup: "./src/js/popup.js",
+        menu: "./src/js/menu.js",
+    },
+    output: {
+        filename: "[name].js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true,
+        publicPath: "",
+    },
+    mode: "development",
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.html$/,
+                use: ["html-loader"],
+            },
+        ],
+    },
+    optimization: {
+        minimize: false, // This helps avoid eval()
+    },
+    devtool: false, // Disable source maps
+    plugins: [
+        new ExtReloader({
+            port: 9090,
+            reloadPage: true,
+            entries: {
+                background: "worker",
+                contentScript: "content",
+                extensionPage: ["popup", "menu"],
+            },
+        }),
+        new HtmlWebpackPlugin({
+            template: "./src/html/popup.html",
+            filename: "popup.html",
+            chunks: ["popup"],
+            inject: "body",
+        }),
+        new HtmlWebpackPlugin({
+            template: "./src/html/menu.html",
+            filename: "menu.html",
+            chunks: ["menu"],
+            inject: "body",
+        }),
+    ],
 };
