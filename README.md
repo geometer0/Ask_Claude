@@ -1,19 +1,26 @@
 Google Chrome extension that uses Anthropic API calls to provide translation, definition, or explanation of highlighted text.
 
-⚠️ Security Notice ⚠️
-* This extension makes API calls directly from your browser, which requires a "dangerouslyAllowBrowser: true" flag
-* Your API key is entered into the extension menu and stored in Chrome's local storage
-* I am not fully aware of the security flaws of this, but if someone has access to Chrome on your machine they probably have access to your API key
+### Requires:
+* Anthropic subscription
+* Anthropic API key
+* Google Chrome
+* npm
 
-TODO:
+### Installation
 
-* Look into autobuild options, manual reloading is tiresome
-* Make popup responsive to length of text
-* Give menu more of a darkmode feel
-* Give popup more of a darkmode feel
-* Try removing the weird shadowboxes around each form field in menu
-* Re-organize files into html, css, js folders
+1. Download the project
+2. In the project directory, run:
+```
+npm install
+npm run build
+```
+3. Follow these instructions for [loading an unpacked Chrome extentension](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
+4. Open the extension menu, paste in your Anthropic API key, and click 'Update API Key'.
+5. Highlight text in browser and right click to get a menu option "Ask Claude".
 
-Ideas:
+### Development
 
-*Better prompt handling. Not sure how desireable it is to change prompt other than language instructions
+As above, but use the following to take advantage of web extension hot reloading:
+```
+npm run watch
+```
