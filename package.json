@@ -1,23 +1,23 @@
 {
-  "name": "claude_chrome",
-  "version": "1.0.0",
-  "description": "Google Chrome extension that uses Anthropic API calls to provide translation, definition, or explanation of highlighted text.",
-  "main": "content.js",
-  "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@anthropic-ai/sdk": "^0.32.1",
-    "css-loader": "^7.1.2",
-    "html-loader": "^5.1.0",
-    "html-webpack-plugin": "^5.6.3",
-    "style-loader": "^4.0.0",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4",
-    "webpack-ext-reloader": "^1.1.13"
-  }
+    "name": "claude_chrome",
+    "version": "1.0.0",
+    "description": "Google Chrome extension that uses Anthropic API calls to provide translation, definition, or explanation of highlighted text.",
+    "main": "content.js",
+    "scripts": {
+        "build": "webpack --mode production --no-watch",
+        "watch": "webpack --watch"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@anthropic-ai/sdk": "^0.32.1",
+        "css-loader": "^7.1.2",
+        "html-loader": "^5.1.0",
+        "html-webpack-plugin": "^5.6.3",
+        "style-loader": "^4.0.0",
+        "webpack": "^5.96.1",
+        "webpack-cli": "^5.1.4",
+        "webpack-ext-reloader": "^1.1.13"
+    }
 }
