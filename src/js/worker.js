@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
 async function createPopup(message) {
     try {
         await chrome.windows.create({
-            url: "popup.html",
+            url: "/dist/popup.html",
             focused: true,
             type: "popup",
             width: 400,

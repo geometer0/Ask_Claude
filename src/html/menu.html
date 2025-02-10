@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- <link rel="stylesheet" href="../css/menu.css" />
+        <script src="../dist/menu.js" defer></script> -->
+    </head>
+    <body>
+        <div class="container">
+            <form id="apiKeyForm" class="settings-form">
+                <div class="input-group">
+                    <label for="apiKey">Anthropic API Key</label>
+                    <input type="password" id="apiKey" required />
+                    <button type="submit">Update API Key</button>
+                    <span class="success-message" id="apiKeySuccess"
+                        >API key updated</span
+                    >
+                </div>
+            </form>
+
+            <form id="promptForm" class="settings-form">
+                <div class="input-group">
+                    <label for="systemPrompt">System Prompt</label>
+                    <textarea id="systemPrompt"></textarea>
+                    <div class="button-container">
+                        <button type="submit">Update System Prompt</button>
+                        <button type="button" id="reset">
+                            Reset to Default
+                        </button>
+                    </div>
+                    <span class="success-message" id="promptSuccess"
+                        >System prompt updated</span
+                    >
+                    <span class="success-message" id="resetMessage"
+                        >System prompt reset to default</span
+                    >
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
