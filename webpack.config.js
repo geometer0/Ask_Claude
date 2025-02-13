@@ -32,15 +32,19 @@ module.exports = {
     },
     devtool: false, // Disable source maps
     plugins: [
-        new ExtReloader({
-            port: 9090,
-            reloadPage: true,
-            entries: {
-                background: "worker",
-                contentScript: "content",
-                extensionPage: ["popup", "menu"],
-            },
-        }),
+        ...(process.env.NODE_ENV === "development" //conditional prevents hotload disabled warning on prod build
+            ? [
+                  new ExtReloader({
+                      port: 9090,
+                      reloadPage: true,
+                      entries: {
+                          background: "worker",
+                          contentScript: "content",
+                          extensionPage: ["popup", "menu"],
+                      },
+                  }),
+              ]
+            : []),
         new HtmlWebpackPlugin({
             template: "./src/html/popup.html",
             filename: "popup.html",
