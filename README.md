@@ -1,5 +1,9 @@
 Google Chrome extension that uses Anthropic API calls to provide translation, definition, or explanation of highlighted text.
 
+
+https://github.com/user-attachments/assets/fdb81137-1f1e-4130-8b0b-fbead189e708
+
+
 ### Requires:
 * Anthropic subscription
 * Anthropic API key
